@@ -23,8 +23,11 @@ namespace PortalLogin
             Task.Run(() => driver.Add(new ChromeDriver()));
             Task.Run(() => driver.Add(new ChromeDriver()));
             Task.Run(() => driver.Add(new ChromeDriver()));
+
+            cts = new CancellationTokenSource();
         }
 
+        private CancellationTokenSource cts;
         private List<IWebDriver> driver = new List<IWebDriver>();
 
         private string number;
@@ -41,6 +44,8 @@ namespace PortalLogin
             Task task3 = ReloadBrowserAsync(2);
 
             Task completedTask = await Task.WhenAny(task1, task2, task3);
+
+            cts.Cancel();
 
             number1.Text = "Login success";
         }
@@ -80,7 +85,7 @@ namespace PortalLogin
             Dispatcher.BeginInvoke(new ThreadStart(() => username = txt_Username.Text));
 
             //GET PASSWORD
-            number = rd.Next(0, 1000).ToString();
+            number = rd.Next(0, 100).ToString();
             Dispatcher.BeginInvoke(new ThreadStart(() => password = txt_PasswordBox.Password + number));
         }
 
@@ -92,6 +97,12 @@ namespace PortalLogin
 
                 while (true)
                 {
+                    if (cts.IsCancellationRequested)
+                    {
+                        driver[i].Close();
+                        break;
+                    }
+
                     Stopwatch watch = Stopwatch.StartNew();
 
                     if (CheckCorrectPassword(i) == false || CheckWebpageError(i) == true)
