@@ -1,0 +1,27 @@
+﻿<Window x:Class="PortalLogin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PortalLogin"
+        mc:Ignorable="d"
+        Title="PortalLogin" Height="400" Width="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*" />
+            <ColumnDefinition Width="127*" />
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lbl_Username" Content="Username" HorizontalAlignment="Left" Margin="26,54,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="26" Width="64" />
+        <TextBox x:Name="txt_Username" Text="1612145" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="17.4,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" />
+
+        <Label x:Name="lbl_Password" Content="Password" HorizontalAlignment="Left" Margin="26,94,0,0" VerticalAlignment="Top" Height="26" Width="59" />
+        <PasswordBox x:Name="txt_PasswordBox" Password="alonedarkness0129960604" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="17.4,97,0,0" VerticalAlignment="Top" Width="200" />
+
+        <Button x:Name="button" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="17.4,145,0,0" VerticalAlignment="Top" Width="78" Height="34" Click="button_Click" />
+
+        <Label x:Name="lbl_WrongIDPass" Content="Sai tên đăng nhập hoặc mật khẩu" HorizontalAlignment="Left" Margin="17.4,23,0,0" VerticalAlignment="Top" Width="200" Foreground="Red" Grid.Column="1" Visibility="Hidden" Height="26" />
+        <TextBlock x:Name="number1" Grid.Column="1" HorizontalAlignment="Left" Margin="20,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock x:Name="number2" Grid.Column="1" HorizontalAlignment="Left" Margin="20,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" d:IsHidden="True" />
+        <TextBlock x:Name="number3" Grid.Column="1" HorizontalAlignment="Left" Margin="140,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" d:IsHidden="True" />
+    </Grid>
+</Window>
