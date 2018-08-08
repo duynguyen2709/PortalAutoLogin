@@ -15,13 +15,13 @@
         <TextBox x:Name="txt_Username" Text="1612145" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="17.4,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" />
 
         <Label x:Name="lbl_Password" Content="Password" HorizontalAlignment="Left" Margin="26,94,0,0" VerticalAlignment="Top" Height="26" Width="59" />
-        <PasswordBox x:Name="txt_PasswordBox" Password="alonedarkness0129960604" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="17.4,97,0,0" VerticalAlignment="Top" Width="200" />
+        <TextBox x:Name="txt_Password" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="alonedarkness0129960604" VerticalAlignment="Top" Width="200" Grid.Column="1" Margin="17.4,98,0,0" />
 
-        <Button x:Name="button" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="17.4,145,0,0" VerticalAlignment="Top" Width="78" Height="34" Click="button_Click" />
+        <Button x:Name="button" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="17.4,196,0,0" VerticalAlignment="Top" Width="78" Height="34" Click="button_Click" />
 
         <Label x:Name="lbl_WrongIDPass" Content="Sai tên đăng nhập hoặc mật khẩu" HorizontalAlignment="Left" Margin="17.4,23,0,0" VerticalAlignment="Top" Width="200" Foreground="Red" Grid.Column="1" Visibility="Hidden" Height="26" />
-        <TextBlock x:Name="number1" Grid.Column="1" HorizontalAlignment="Left" Margin="20,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
-        <TextBlock x:Name="number2" Grid.Column="1" HorizontalAlignment="Left" Margin="20,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" d:IsHidden="True" />
-        <TextBlock x:Name="number3" Grid.Column="1" HorizontalAlignment="Left" Margin="140,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" d:IsHidden="True" />
+
+        <ComboBox x:Name="cb_Threads" HorizontalAlignment="Left" Margin="17.4,145,0,0" VerticalAlignment="Top" Width="52" Grid.Column="1" SelectedIndex="2" />
+        <Label x:Name="lbl_Threads" Content="Threads" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.488,5.055" Margin="26,142,0,0" Width="70" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

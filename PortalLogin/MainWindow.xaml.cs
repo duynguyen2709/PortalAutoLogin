@@ -17,12 +17,12 @@ namespace PortalLogin
         {
             InitializeComponent();
 
-            txt_PasswordBox.PasswordChar = '*';
-            lbl_WrongIDPass.Visibility = Visibility.Hidden;
+            for (int i = 1; i <= 5; i++)
+                cb_Threads.Items.Add(i);
 
-            Task.Run(() => driver.Add(new ChromeDriver()));
-            Task.Run(() => driver.Add(new ChromeDriver()));
-            Task.Run(() => driver.Add(new ChromeDriver()));
+            //Task.Run(() => driver.Add(new ChromeDriver()));
+            //Task.Run(() => driver.Add(new ChromeDriver()));
+            //Task.Run(() => driver.Add(new ChromeDriver()));
 
             cts = new CancellationTokenSource();
         }
@@ -30,24 +30,35 @@ namespace PortalLogin
         private CancellationTokenSource cts;
         private List<IWebDriver> driver = new List<IWebDriver>();
 
+        //private IWebDriver checkPassDriver;
         private string number;
+
         private string password;
         private System.Random rd = new System.Random();
         private string username;
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            lbl_WrongIDPass.Visibility = Visibility.Hidden;
+            int n = (int)cb_Threads.SelectedItem;
 
-            Task task1 = ReloadBrowserAsync(0);
-            Task task2 = ReloadBrowserAsync(1);
-            Task task3 = ReloadBrowserAsync(2);
+            List<Task> taskList = new List<Task>();
 
-            Task completedTask = await Task.WhenAny(task1, task2, task3);
+            for (int i = 0; i < n; i++)
+            {
+                taskList.Add(OpenBrowsersAsync());
+            }
+
+            await Task.WhenAll(taskList);
+
+            taskList.Clear();
+            for (int i = 0; i < n; i++)
+            {
+                taskList.Add(ReloadBrowserAsync(i));
+            }
+
+            await Task.WhenAny(taskList);
 
             cts.Cancel();
-
-            number1.Text = "Login success";
         }
 
         private bool CheckCorrectPassword(int i)
@@ -55,9 +66,9 @@ namespace PortalLogin
             GetInfo();
             SetInfo(i);
 
-            var wrongPassList = driver[i].FindElements(By.Id("ctl00_ContentPlaceHolder1_msg"));
+            var error = driver[i].FindElements(By.Id("ctl00_ContentPlaceHolder1_msg"));
 
-            if (wrongPassList.Count > 0)
+            if (error.Count > 0)
             {
                 return false;
             }
@@ -86,7 +97,15 @@ namespace PortalLogin
 
             //GET PASSWORD
             number = rd.Next(0, 100).ToString();
-            Dispatcher.BeginInvoke(new ThreadStart(() => password = txt_PasswordBox.Password + number));
+            Dispatcher.BeginInvoke(new ThreadStart(() => password = txt_Password.Text + number));
+        }
+
+        private async Task OpenBrowsersAsync()
+        {
+            await Task.Run(() =>
+            {
+                driver.Add(new ChromeDriver());
+            });
         }
 
         private async Task ReloadBrowserAsync(int i)
@@ -123,7 +142,6 @@ namespace PortalLogin
             });
         }
 
-        // });
         private void SetInfo(int i)
         {
             try
